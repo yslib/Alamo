@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AlamoApp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoType.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoError.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoGame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoSprite.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoSound.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoSpriteBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoBMPFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoAnimation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoAnimatedSprite.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlamoLevel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AlamoApp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Alamo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoError.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoMsgMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoInputDevice.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoDebug.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoScreenMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoScreenObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoSpriteBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoImageFileBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoSprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoPtr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoSound.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoLevelFileBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoBMPFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoAnimation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoAnimatedSprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlamoLevel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
