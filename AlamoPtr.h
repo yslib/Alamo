@@ -109,13 +109,13 @@ namespace Alamo
 		alaPtr<T>::operator=(
 			const alaPtr & sourceObject)
 	{
-		if (refCountedObjectPointer != sourceObject)
+		if (refCountedObjectPointer != sourceObject.refCountedObjectPointer)
 		{
 			if (refCountedObjectPointer)
 			{
 				refCountedObjectPointer->Dec_Reference();
 			}
-			refCountedObjectPointer = sourceObject;
+			refCountedObjectPointer = sourceObject.refCountedObjectPointer;
 			Init();
 		}
 		return (*this);
@@ -173,7 +173,7 @@ namespace Alamo
 		{
 			T * oldData = refCountedObjectPointer->dataPointer;
 
-			if ((refCountedObjectPointer = new RefCountedObject) == NULL)
+			if ((refCountedObjectPointer = new RefCountedObject) == NULL)		//call operator= of RefCountedObject
 			{
 				throw alaError(ALAES_OUT_OF_MEMORY);
 			}

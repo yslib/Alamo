@@ -144,6 +144,7 @@ static std::string errorString[24] =
 
 	};
 
+
 	//Begin inline functions definition for alaError class-----------
 
 	//End the inline function definition for the alaError class

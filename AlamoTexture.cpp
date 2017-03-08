@@ -93,9 +93,10 @@ namespace Alamo
 			height = imageFile.Height();
 			width = imageFile.Width();
 			glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+			GLenum en = glGetError();
 			glGenTextures(1, &textureID);
-
-			assert(glGetError() == GL_NO_ERROR);
+			en = glGetError();
+			assert(en == GL_NO_ERROR);
 		}
 		
 		return ok;

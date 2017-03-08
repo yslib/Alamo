@@ -23,13 +23,13 @@
     <ProjectGuid>{46D1A9C7-1AF6-4B0D-9E16-F0B78D5C1B13}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Alamo</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -154,6 +154,9 @@
     <ClCompile Include="AlamoSpriteBase.cpp" />
     <ClCompile Include="AlamoTexture.cpp" />
     <ClCompile Include="AlamoType.cpp" />
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="Ping.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alamo.h" />
@@ -177,6 +180,9 @@
     <ClInclude Include="AlamoSpriteBase.h" />
     <ClInclude Include="AlamoTexture.h" />
     <ClInclude Include="AlamoType.h" />
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="GramaPtr.h" />
+    <ClInclude Include="Paddle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

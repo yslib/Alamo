@@ -185,7 +185,7 @@ namespace Alamo
 	{
 		DWORD id;
 		HWND windowHandle;
-		WPARAM wPrarm;
+		WPARAM wParam;
 		LPARAM lParam;
 
 		alaWindowsInputMessage()
@@ -193,7 +193,7 @@ namespace Alamo
 			type = WINDOWS_INPUT_MESSAGE;
 			id = UNKNOWN_TYPE;
 			windowHandle = NULL;
-			wPrarm = 0;
+			wParam = 0;
 			lParam = 0;
 		}
 	};

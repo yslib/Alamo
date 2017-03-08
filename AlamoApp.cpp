@@ -18,6 +18,7 @@
 //
 // Define the global variant theApp.The program is based on this variant.
 // Please read AlomoApp.h to learn how the global variant works
+
 Alamo::AlamoApp theApp;		
 //END---------------------------
 
@@ -87,7 +88,7 @@ namespace Alamo
 		
 		bool error= false;
 
-		WNDCLASSEXW wc;
+		WNDCLASSEXA wc;
 
 		HWND hWnd = 0;
 
@@ -96,22 +97,22 @@ namespace Alamo
 
 		//To run this call normally,you need attach the macro in the AlamoApp.h to your own class
 		theApp.Create_Game_Object();
-		//END------------------
 
 
-		//error = theApp.theGame->On_App_Load();
-		assert(theApp.appInitialized == true); 
+
+		error = !theApp.theGame->On_App_Load();
+		assert(theApp.appInitialized == true);
 
 		if (error == false) 
 		{
 			if (theApp.engineInitParams.openParams.fullScreenWindow == true)
 			{
-				error = theApp.Set_Screen_Resolution();
+				error = !theApp.Set_Screen_Resolution();
 
-				if (error == false)		
+				if (error == true)		
 				{
-					::MessageBoxW(NULL,
-						(LPCWSTR)("Your screen does not support the video mode this game uses"),
+					::MessageBoxA(NULL,
+						(LPCSTR)("Your screen does not support the video mode this game uses"),
 						NULL,
 						MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL);
 					return (0);
@@ -122,23 +123,23 @@ namespace Alamo
 		if (error == false)
 		{
 			//Register the window class
-			WNDCLASSEXW twc = {
-				sizeof(WNDCLASSEXW),
+			WNDCLASSEXA twc = {
+				sizeof(WNDCLASSEX),
 				CS_CLASSDC,
 				Msg_Proc,
 				0L,
 				0L,
-				GetModuleHandleW(NULL),
+				GetModuleHandleA(NULL),
 				NULL,
 				NULL,
 				NULL,
 				NULL,
-				(LPCWSTR)(ALAMO_WINDOW_CLASS_NAME),
+				(LPCSTR)(ALAMO_WINDOW_CLASS_NAME),
 				NULL
 			};
 
 			wc = twc;
-			if (RegisterClassExW(&wc) == 0)
+			if (RegisterClassExA(&wc) == 0)
 			{
 				alaError initIsOk(ALAES_CANT_CREATE_RAW_INPUT_BUFFER);
 				throw initIsOk;
@@ -172,10 +173,10 @@ namespace Alamo
 
 			if (theApp.engineInitParams.openParams.fullScreenWindow == true)
 			{
-				hWnd = CreateWindowExW(
+				hWnd = CreateWindowExA(
 					WS_EX_APPWINDOW | WS_EX_TOPMOST,
-					(LPCWSTR)ALAMO_WINDOW_CLASS_NAME,
-					(LPCWSTR)title.c_str(),
+					(LPCSTR)ALAMO_WINDOW_CLASS_NAME,
+					(LPCSTR)title.c_str(),
 					WS_POPUP,
 					x,
 					y,
@@ -186,9 +187,9 @@ namespace Alamo
 			}
 			else
 			{
-				hWnd = CreateWindowW(
-					(LPCWSTR)ALAMO_WINDOW_CLASS_NAME,
-					(LPCWSTR)title.c_str(),
+				hWnd = CreateWindowA(
+					(LPCSTR)ALAMO_WINDOW_CLASS_NAME,
+					(LPCSTR)title.c_str(),
 					WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS |
 					WS_CLIPCHILDREN | WS_MAXIMIZE,
 					x,
@@ -209,12 +210,12 @@ namespace Alamo
 
 		if (error == false)
 		{
-			error = theApp.Init_Game_Subsystem(hWnd);
+			error = !theApp.Init_Game_Subsystem(hWnd);
 		}
 
 		if (error == false)
 		{
-			//error = theApp.theGame->Init_Game();
+			error = !theApp.theGame->Init_Game();
 			if (error == true)
 			{
 				throw alaError(ALAES_CANT_INIT_GAME);
@@ -235,7 +236,7 @@ namespace Alamo
 			else
 			{
 				theApp.timeToUpdateFrame = false;
-				//
+
 				Create_Animation_Timer(hWnd);
 			}
 
@@ -251,52 +252,52 @@ namespace Alamo
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
 				}
-				else
-				{
-					if (theApp.timeToUpdateFrame)
-					{
-						if (theApp.theGame->Update_Frame() == false)
-						{
-							::MessageBoxW(NULL,
-								(LPCWSTR)theApp.App_Error().Error_Mesaage().c_str(),
-								NULL,
-								MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL);
-							theApp.End_Game();
-						}
-					}
-					theApp.mainWdinwoHandle = hWnd;
-
-					if (theApp.Render() == false)
-					{
-						::MessageBoxA(NULL,
-							theApp.App_Error().Error_Mesaage().c_str(),
-							NULL, MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL);
-						theApp.End_Game();
-					}
-					if (frameTime > 0)
-					{
-						theApp.timeToUpdateFrame = false;
-					}
-					if (theApp.theGame->Game_Over() == true)
-					{
-						if (theApp.theGame->Do_Game_Over() == false)
-						{
-							theApp.End_Game();
-						}
-					}
-					if (theApp.theGame->Level_Done() == true)
-					{
-						levelIsOk = theApp.theGame->Do_Level_Done();
-						if (levelIsOk)
-						{
-							levelIsOk = theApp.theGame->Init_Level();
-						}
 						else
 						{
-							theApp.End_Game();
+							if (theApp.timeToUpdateFrame)
+							{
+								if (theApp.theGame->Update_Frame() == false)
+								{
+									::MessageBoxA(NULL,
+										(LPCSTR)theApp.App_Error().Error_Mesaage().c_str(),
+										NULL,
+										MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL);
+									theApp.End_Game();
+								}
+							}
+							theApp.mainWdinwoHandle = hWnd;
+
+							if (theApp.Render() == false)
+							{
+								::MessageBoxA(NULL,
+									theApp.App_Error().Error_Mesaage().c_str(),
+									NULL, MB_OK | MB_ICONSTOP | MB_SYSTEMMODAL);
+								theApp.End_Game();
+							}
+							if (frameTime > 0)
+							{
+								theApp.timeToUpdateFrame = false;
+							}
+							if (theApp.theGame->Game_Over() == true)
+							{
+								if (theApp.theGame->Do_Game_Over() == false)
+								{
+									theApp.End_Game();
+								}
+							}
+							if (theApp.theGame->Level_Done() == true)
+							{
+								levelIsOk = theApp.theGame->Do_Level_Done();
+								if (levelIsOk)
+								{
+									levelIsOk = theApp.theGame->Init_Level();
+								}
+								else
+								{
+									theApp.End_Game();
+								}
+							}
 						}
-					}
-				}
 			}
 
 		}
@@ -304,7 +305,7 @@ namespace Alamo
 		{
 			theApp.Delete_Game_Object();
 		}
-		UnregisterClassW((LPCWSTR)ALAMO_WINDOW_CLASS_NAME, wc.hInstance);
+		UnregisterClassA((LPCSTR)ALAMO_WINDOW_CLASS_NAME, wc.hInstance);
 		return 0;
 	}
 
@@ -350,7 +351,7 @@ namespace Alamo
 				theMesaage.type = WINDOWS_INPUT_MESSAGE;
 				theMesaage.id = msg;
 				theMesaage.windowHandle = hWnd;
-				theMesaage.wPrarm = wParam;
+				theMesaage.wParam = wParam;
 				theMesaage.lParam = lParam;
 
 				theApp.theGame->Process_Input_Message_Map(theMesaage);
@@ -616,7 +617,7 @@ namespace Alamo
 		PostQuitMessage(0);
 	}
 
-	inline alaGame * AlamoApp::Game()
+	alaGame * AlamoApp::Game()
 	{
 		assert(appInitialized);
 		return (theGame);
@@ -637,17 +638,17 @@ namespace Alamo
 		}
 	}
 
-		inline alaColorRGBA AlamoApp::Background_Surface_Color()
+		alaColorRGBA AlamoApp::Background_Surface_Color()
 	{
 		return engineInitParams.openParams.openGLParams.surfaceBackGroundColor;
 	}
 
-	inline int AlamoApp::Screen_Height()
+	int AlamoApp::Screen_Height()
 	{
 		return (screenHeight);
 	}
 
-	inline int AlamoApp::Screen_Width()
+	int AlamoApp::Screen_Width()
 	{
 		return (screenWidth);
 	}

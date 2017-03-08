@@ -9,7 +9,7 @@ namespace Alamo
 
 #define START_MESSAGE_MAP(classname)			\
 	void classname::Process_Input_Message_Map(	\
-	alaWindowsInputMessage &theMessage)			\
+	Alamo::alaWindowsInputMessage &theMessage)			\
 	{											\
 		bool callParent = false;				\
 		if(callParent != false){}				
@@ -21,28 +21,28 @@ namespace Alamo
 #define ON_WMKEYDOWN(fnname)					\
 		else if(theMessage.id == WM_KEYDOWN)	\
 		{										\
-			alaKeybordInputMessage keyboardMessage;							\
+			Alamo::alaKeybordInputMessage keyboardMessage;							\
 			keyboardMessage.id = theMessage.id;								\
 			keyboardMessage.windowHandle = theMessage.windowHandle;			\
 			keyboardMessage.wParam = theMessage.wParam;						\
 			keyboardMessage.lParam = theMessage.lParam;						\
-			keyboardMessage.keyCode = (alaKeyCode)theMessage.wParam			\
+			keyboardMessage.keyCode = (Alamo::alaKeyCode)theMessage.wParam;	\
 			keyboardMessage.repeatCount =									\
 			keyboardMessage.lParam & 0x0FFFF;								\
 			keyboardMessage.scanCode =										\
 			(theMessage.lParam & 0x0FF0000) >> 16;							\
-			keyboardMessage.isExtendeKey =									\
+			keyboardMessage.isExtendedKey =									\
 			((theMessage.lParam & 0x01000000) == 0) ?						\
 			false:true;														\
 			keyboardMessage.previousState =									\
 			((theMessage.lParam & 0xFE000000) == 0) ?						\
-			BUTTON_UP:BUTTON_DOWN;											\
+			(Alamo::alaButtonState::BUTTON_UP):(Alamo::alaButtonState::BUTTON_DOWN);				\
 			callParent = fnname(keyboardMessage);							\
 		}																	
 #define ON_WMCHAR(fnname)													\
 		if(theMessage.ID() == WM_CHAR)										\
 		{																	\
-			alaCharacterMessage charMessage;								\
+			Alamo::alaCharacterMessage charMessage;								\
 			charMessage.id = theMessag.id;									\
 			charMessage.windowHandle = theMessage.windowHandle;				\
 			charMessage.wParam = the MEssage.wParam;						\
@@ -57,7 +57,7 @@ namespace Alamo
 
 
 #define ATTACH_MESSAGE_MAP													\
-	virtual void Process_Input_Message_Map(alaWindowsInputMessage &theMessage);
+	virtual void Process_Input_Message_Map(Alamo::alaWindowsInputMessage &theMessage);
 
 
 

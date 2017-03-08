@@ -47,7 +47,7 @@ namespace Alamo {
 		alaColorRGBA surfaceBackGroundColor;
 		PIXELFORMATDESCRIPTOR pixelFormat;
 
-		alaOpenglInitParams() :surfaceBackGroundColor(0.0f, 0.0f, 0.0f, 0.0f)
+		alaOpenglInitParams() :surfaceBackGroundColor(0.0f, 0.0f, 0.5f, 0.0f)
 		{
 
 		}
@@ -99,7 +99,7 @@ namespace Alamo {
 
 		void App_Error(alaErrorStatus errorCode, alaString errorMessage = ""){appError.Error(errorCode, errorMessage);}
 
-		void RWS_Set_Time_TO_Update_Frame(int aBool) { timeToUpdateFrame = aBool; }
+		void RWS_Set_Time_TO_Update_Frame(bool aBool) { timeToUpdateFrame = aBool; }
 #ifndef DEBUGOFF
 
 		bool Open_LogFile(char *logFileName);
@@ -201,7 +201,7 @@ namespace Alamo {
 
 
 #define  CREATE_GAME_OBJECT(GameClass)			\
-bool AlamoApp::Create_Game_Object(void)			\
+bool Alamo::AlamoApp::Create_Game_Object(void)			\
 {												\
 	bool gameObjectCreated = true;				\
 	theGame = new GameClass;					\
@@ -209,9 +209,9 @@ bool AlamoApp::Create_Game_Object(void)			\
 	{											\
 		gameObjectCreated = false;				\
 	}											\
-	return (gameObjectedCreated);				\
+	return (gameObjectCreated);				\
 }												\
-void AlamoApp::Delete_Game_Object(void)			\
+void Alamo::AlamoApp::Delete_Game_Object(void)			\
 {												\
 	if(theGame != NULL)							\
 	{											\
@@ -224,7 +224,7 @@ void AlamoApp::Delete_Game_Object(void)			\
 #define  EXTERN extern
 #endif // !EXTERN
 
-	EXTERN AlamoApp theApp;			//声明外部全局变量		告诉所有包含此头文件的代码文件中若有 theApp，则它就是全局变量
+	EXTERN Alamo::AlamoApp theApp;			//声明外部全局变量		告诉所有包含此头文件的代码文件中若有 theApp，则它就是全局变量
 
 }
 Alamo::AlamoApp * GetAppObject();

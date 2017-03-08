@@ -9,6 +9,15 @@ namespace Alamo
 
 	typedef std::string alaString;
 
+	typedef std::string GString;
+
+	template<typename T>
+	struct GPoint2D
+	{
+		T xCom, yCom;
+		GPoint2D(const T & x = T(), const T & y = T());
+	};
+
 
 	struct alaPoint2D
 	{
@@ -201,6 +210,30 @@ namespace Alamo
 
 		float Magnitude()const;
 		alaVectorf2D Normalize()const;
+	};
+
+
+	template <typename T>
+	class GVector2D{
+	private:
+		int xCom, yCom;
+	public:
+		GVector2D(const T & x = T(), const T & y = T()) :xCom(x), tCom(y) {}
+		int X();
+		int Y();
+		void X(const T & x);
+		void Y(const T & y);
+		GVector2D<T> operator+(const GVector2D<T> & rhs)const;
+		GVector2D<T> operator-(const GVector2D<T> & rhs)const;
+		GVector2D<T> operator*(const T & scale)const;
+		GVector2D<T> operator*(const GVector2D<T> & rhs)const;
+		friend GVector2D<T> operator*(const T & scale, const GVector2D<T> & rhs);
+		GVector2D<T> & operator+=(const GVector2D<T> & rhs);
+		GVector2D<T> & operator-=(const GVector2D<T> & rhs);
+		GVector2D<T> & operator*=(const T & scale);
+		GVector2D<T> & operator*=(const GVector2D<T> & rhs);
+		T Magnitude()const;
+		GVector2D<T> Normalize()const;
 	};
 
 }

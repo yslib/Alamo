@@ -1,6 +1,7 @@
 #include "Alamo.h"
 #include "AlamoBMPFile.h"
 #include "AlamoApp.h"
+#include <errno.h>
 namespace Alamo
 {
 
@@ -11,7 +12,7 @@ namespace Alamo
 
 	alaBMPFile::alaBMPFile()
 	{
-
+		bitmapImage = NULL;
 	}
 
 	alaBMPFile::alaBMPFile(alaString fileName)
@@ -52,6 +53,7 @@ namespace Alamo
 		{
 			ok = false;
 			theApp.App_Error(ALAES_COULD_NOT_OPEN_FILE);
+			throw alaError(ALAES_COULD_NOT_OPEN_FILE,std::strerror(errno));
 		}
 
 		if (ok == true)
@@ -80,9 +82,34 @@ namespace Alamo
 				theApp.App_Error(ALAES_INVALID_FILE_TYPE);
 			}
 		}
-
 		if (ok == true)
 		{
+			itemsRead = fread(&bitmapInfoHeader,
+				sizeof(BITMAPINFOHEADER),
+				1,
+				bmpFile);
+
+			if (itemsRead <= 0)
+			{
+				fclose(bmpFile);
+
+				ok = false;
+				theApp.App_Error(ALAES_COULD_NOT_OPEN_FILE);
+			}
+		}
+		if (ok == true)
+		{
+			if (bitmapInfoHeader.biBitCount != 32)
+			{
+				fclose(bmpFile);
+
+				ok = false;
+				theApp.App_Error(ALAES_OUT_OF_MEMORY);
+			}
+		}
+		if (ok == true)
+		{
+			bitmapInfoHeader.biSizeImage = bitmapInfoHeader.biWidth * bitmapInfoHeader.biHeight * bitmapInfoHeader.biBitCount/8;
 			bitmapImage = new alaRawPixelData[bitmapInfoHeader.biSizeImage];
 
 			if (bitmapImage == NULL)
@@ -93,6 +120,7 @@ namespace Alamo
 				theApp.App_Error(ALAES_OUT_OF_MEMORY);
 			}
 		}
+
 		if (ok == true)
 		{
 			fseek(bmpFile, bitmapFileHeader.bfOffBits, SEEK_SET);
